@@ -1,4 +1,4 @@
-# Create Social Network ![npm](https://img.shields.io/npm/dm/create-social-network) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
+# Kache Social Network ![npm](https://img.shields.io/npm/dm/create-social-network) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
 
 Kache is a educational project. The main idea is to demonstrate how one can build a large scalable project with Javascript. However you get the core functionality of social network by running one command and then you can build more on top of that.
 
@@ -21,17 +21,6 @@ Repository is divided into three main packages:
 
 ## Demo
 
-
-## Screenshots of the app
-
-|                                        Home                                        |                                        Messages                                        |                                        Profile                                        |
-| :--------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
-| ![](https://res.cloudinary.com/dkkf9iqnd/image/upload/v1573322911/home_nmms37.png) | ![](https://res.cloudinary.com/dkkf9iqnd/image/upload/v1573322910/messages_kt8gts.png) | ![](https://res.cloudinary.com/dkkf9iqnd/image/upload/v1573322910/profile_nzntwk.png) |
-
-|                                        People                                        |                                        Explore                                        |                                        Notifications                                        |
-| :----------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| ![](https://res.cloudinary.com/dkkf9iqnd/image/upload/v1573322911/people_ag2to0.png) | ![](https://res.cloudinary.com/dkkf9iqnd/image/upload/v1573322912/explore_uewztd.png) | ![](https://res.cloudinary.com/dkkf9iqnd/image/upload/v1573322910/notifications_yfxweb.png) |
-
 ## Quick Installation
 
 ```sh
@@ -47,7 +36,6 @@ my-network
 ├── frontend
 ├── node_modules
 ├── .gitignore
-├── netlify.toml
 ├── package.json
 ├── README.md
 ```
