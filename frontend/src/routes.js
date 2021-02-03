@@ -2,6 +2,8 @@
  * All available routes for the app
  */
 
+export const LANDING = '/home';
+ 
 export const HOME = '/';
 
 export const FORGOT_PASSWORD = '/forgot-password';

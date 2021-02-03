@@ -126,12 +126,13 @@ const SignUp = ({ history, refetch }) => {
 
       <Welcome>
         <div>
-          <Heading color="white">Connect with friends and the world around you.</Heading>
+          <Heading color="white">Connect with neighbours and community.</Heading>
         </div>
 
-        <p>See photos and updates from your friends.</p>
-        <p>Follow your interests.</p>
-        <p>Hear what people are talking about.</p>
+        <p>See photos and updates from your neighbours.</p>
+        <p>Follow your neighbours.</p>
+        <p>Know the community update immediately.</p>
+        <p>Find the government alert.</p>
       </Welcome>
 
       <Form>
