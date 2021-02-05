@@ -70,7 +70,7 @@ const Home = () => {
     if (!posts.length) {
       return (
         <Empty>
-          <StyledA to={generatePath(Routes.EXPLORE)}>Explore new posts</StyledA> or{' '}
+          <StyledA to={generatePath(Routes.DISCOUNTS)}>Explore new disocunts</StyledA> or{' '}
           <StyledA to={generatePath(Routes.PEOPLE)}>Find new people</StyledA>
         </Empty>
       );

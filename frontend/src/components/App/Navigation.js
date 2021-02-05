@@ -58,7 +58,7 @@ const Navigation = () => {
         </ListItem>
       </Link>
 
-      <Link exact activeClassName="selected" to={Routes.EXPLORE}>
+      <Link exact activeClassName="selected" to={Routes.DISCOUNTS}>
         <ListItem>
           <ExploreIcon width={20} />
           <Name>Discounts</Name>
@@ -72,7 +72,7 @@ const Navigation = () => {
         </ListItem>
       </Link>
 
-      <Link exact activeClassName="selected" to={Routes.EXPLORE}>
+      {/* <Link exact activeClassName="selected" to={Routes.EXPLORE}>
         <ListItem>
           <ExploreIcon width={20} />
           <Name>Announcement</Name>
@@ -83,7 +83,7 @@ const Navigation = () => {
           <AlertIcon width={20} />
           <Name>Alert</Name>
         </ListItem>
-      </Link>
+      </Link> */}
       <Link exact activeClassName="selected" to={Routes.NOTIFICATIONS}>
         <ListItem>
           <NotificationIcon width={18} />

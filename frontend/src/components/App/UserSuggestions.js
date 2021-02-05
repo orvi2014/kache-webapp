@@ -70,7 +70,7 @@ const UserSuggestions = ({ pathname }) => {
   });
 
   const hideUserSuggestions = matchPath(pathname, {
-    path: [Routes.MESSAGES, Routes.PEOPLE, Routes.EXPLORE, Routes.USER_PROFILE],
+    path: [Routes.MESSAGES, Routes.PEOPLE, Routes.DISCOUNTS, Routes.USER_PROFILE],
   });
 
   if (hideUserSuggestions) return null;
