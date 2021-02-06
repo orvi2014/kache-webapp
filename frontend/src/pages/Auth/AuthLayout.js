@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { Overlay } from 'components/Layout';
 import { AuthHeader, SignUp, ForgotPassword, ResetPassword } from 'pages/Auth';
-import { LandingPage } from 'pages/Landing';
+// import { LandingPage } from 'pages/Landing';
 
 import * as Routes from 'routes';
 
@@ -52,7 +52,7 @@ const AuthLayout = ({ refetch }) => {
 
         <Pages>
           <Switch>
-            <Route exact path={Routes.LANDING} component={LandingPage} />
+            {/* <Route exact path={Routes.LANDING} component={LandingPage} /> */}
             <Route exact path={Routes.HOME} render={() => <SignUp refetch={refetch} />} />
             <Route exact path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
             <Route exact path={Routes.RESET_PASSWORD} render={() => <ResetPassword refetch={refetch} />} />

@@ -12,6 +12,7 @@ import UserSuggestions from './UserSuggestions';
 import Home from 'pages/Home';
 import Profile from 'pages/Profile';
 import Explore from 'pages/Explore';
+import Discount from 'pages/Discounts';
 import People from 'pages/People';
 import Notifications from 'pages/Notifications';
 import Post from 'pages/Post';
@@ -89,7 +90,7 @@ const AppLayout = ({ location, authUser }) => {
         <Switch>
           <Route exact path={Routes.HOME} component={Home} />
 
-          <Route exact path={Routes.DISCOUNTS} component={Explore} />
+          <Route exact path={Routes.DISCOUNTS} component={Discount} />
 
           <Route exact path={Routes.PEOPLE} component={People} />
 

@@ -71,6 +71,8 @@ const Home = () => {
       return (
         <Empty>
           <StyledA to={generatePath(Routes.DISCOUNTS)}>Explore new disocunts</StyledA> or{' '}
+          <StyledA to={generatePath(Routes.ANNOUNCEMENTS)}>Explore new disocunts</StyledA> or{' '}
+          <StyledA to={generatePath(Routes.ALERTS)}>Explore new disocunts</StyledA> or{' '}
           <StyledA to={generatePath(Routes.PEOPLE)}>Find new people</StyledA>
         </Empty>
       );
