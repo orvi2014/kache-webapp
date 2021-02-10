@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { Spacing, Container } from 'components/Layout';
 import { H1, Error } from 'components/Text';
 import { InputText, Button } from 'components/Form';
+import SelectOption from 'components/Select';
 import Head from 'components/Head';
 
 import { SIGN_UP } from 'graphql/user';
@@ -62,6 +63,7 @@ const SignUp = ({ history, refetch }) => {
     username: '',
     email: '',
     password: '',
+    location: '',
   });
   const [signup, { loading }] = useMutation(SIGN_UP);
 
@@ -71,7 +73,7 @@ const SignUp = ({ history, refetch }) => {
   };
 
   const validate = () => {
-    if (!fullName || !email || !username || !password) {
+    if (!fullName || !email || !username || !password || !location) {
       return 'All fields are required';
     }
 
@@ -109,7 +111,7 @@ const SignUp = ({ history, refetch }) => {
 
     try {
       const response = await signup({
-        variables: { input: { fullName, email, password, username } },
+        variables: { input: { fullName, email, password, username, location } },
       });
       localStorage.setItem('token', response.data.signup.token);
       await refetch();
@@ -119,7 +121,7 @@ const SignUp = ({ history, refetch }) => {
     }
   };
 
-  const { fullName, email, password, username } = values;
+  const { fullName, email, password, username, location } = values;
   return (
     <Root maxWidth="lg">
       <Head />
@@ -174,6 +176,16 @@ const SignUp = ({ history, refetch }) => {
               values={password}
               onChange={handleChange}
               placeholder="Password"
+              borderColor="white"
+            />
+          </Spacing>
+          <Spacing top="xs" bottom="xs">
+            <SelectOption
+              type="location"
+              name="location"
+              values={location}
+              onChange={handleChange}
+              placeholder="Location"
               borderColor="white"
             />
           </Spacing>
