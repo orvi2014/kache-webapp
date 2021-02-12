@@ -32,10 +32,11 @@ export default {
     white: '#fff',
     success: '#34a853',
     body: '#fcfbfe',
+    button: '#ed6966',
 
     primary: {
       light: '#7986cb',
-      main: '#3f51b5',
+      main: '#ed6966',
       dark: '#303f9f',
       contrastText: '#fff',
     },

@@ -20,7 +20,7 @@ export const Button = styled.button`
   font-size: ${p => p.size ? p.theme.font.size[p.size] : p.theme.font.size.xs};
   border-radius: ${p => p.theme.radius.sm};
   padding: ${p => p.theme.spacing.xs} ${p => p.theme.spacing.sm};
-  background-color: ${p => p.color ? p.theme.colors[p.color] : p.theme.colors.primary.main};
+  background-color: ${p => p.color ? p.theme.colors[p.color] : p.theme.colors.button};
   display: flex;
   flex-direction: row;
   justify-content: center;
