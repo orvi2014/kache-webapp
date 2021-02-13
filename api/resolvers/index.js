@@ -7,10 +7,13 @@ import followResolver from './follow';
 import commentResolver from './comment';
 import notificationResolver from './notification';
 import message from './message';
+import locationResolver from './location'; 
+
 
 
 export default [
   userResolver,
+  locationResolver,
   postResolver,
   discountResolver,
   communityPostResolver,
@@ -19,4 +22,5 @@ export default [
   commentResolver,
   notificationResolver,
   message,
+  
 ];

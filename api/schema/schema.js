@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 import UserSchema from './User';
 import PostSchema from './Post';
 import DiscountSchema from './Discount';
+import LocationSchema from './Location';
 import CommunityPost from './CommunityPost';
 import MessageSchema from './Message';
 import LikeSchema from './Like';
@@ -26,6 +27,7 @@ const schema = gql`
   ${UserSchema}
   ${PostSchema}
   ${DiscountSchema}
+  ${LocationSchema}
   ${CommunityPost}
   ${MessageSchema}
   ${FollowSchema}

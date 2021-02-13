@@ -314,7 +314,7 @@ const Mutation = {
    * @param {string} username
    * @param {string} password
    */
-  signup: async (root, { input: { fullName, email, username, password } }, { User }) => {
+  signup: async (root, { input: { fullName, email, username, password, location } }, { User }) => {
     // Check if user with given email or username already exists
     const user = await User.findOne().or([{ email }, { username }]);
     if (user) {
@@ -395,7 +395,10 @@ const Mutation = {
     );
 
     // Email user reset link
-    const resetLink = `${process.env.FRONTEND_URL}/reset-password?email=${email}&token=${token}`;
+    const resetLink = `
+    Dear ${user.fullName}, <br/>
+    Please click on the link to reset your password <br/> 
+    ${process.env.FRONTEND_URL}/reset-password?email=${email}&token=${token}`;
     const mailOptions = {
       to: email,
       subject: 'Password Reset',
