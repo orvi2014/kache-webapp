@@ -367,6 +367,7 @@ const Mutation = {
       email,
       username,
       password,
+      location
     }).save();
 
     return {

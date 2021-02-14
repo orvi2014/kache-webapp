@@ -13,6 +13,7 @@ const UserSchema = gql`
     email: String!
     username: String!
     password: String!
+    location: String!
     resetToken: String
     resetTokenExpiry: String
     image: File
@@ -57,6 +58,7 @@ const UserSchema = gql`
     username: String!
     fullName: String!
     password: String!
+    location: String!
   }
 
   input RequestPasswordResetInput {

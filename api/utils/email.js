@@ -5,7 +5,6 @@ const { MAIL_SERVICE, MAIL_USER, MAIL_PASS, MAIL_HOST } = process.env;
 /**
  * Creates transporter object that will help us to send emails
  */
-console.log(MAIL_PASS);
 const transporter = nodemailer.createTransport({
   service: MAIL_SERVICE,
   host: MAIL_HOST,

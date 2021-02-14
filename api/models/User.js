@@ -26,11 +26,11 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
     },
-    // location: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Location',
-    //   required: true,
-    // },
+    location: {
+      type: Schema.Types.ObjectId,
+      ref: 'Location',
+      required: true,
+    },
     passwordResetToken: String,
     passwordResetTokenExpiry: Date,
     password: {

@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client';
 import { Spacing, Container } from 'components/Layout';
 import { H1, Error } from 'components/Text';
 import { InputText, Button } from 'components/Form';
-import SelectOption from 'components/Select';
+import Select from 'components/Select';
 import Head from 'components/Head';
 
 import { SIGN_UP } from 'graphql/user';
@@ -63,17 +63,18 @@ const SignUp = ({ history, refetch }) => {
     username: '',
     email: '',
     password: '',
-    // location: '',
+    location: '',
   });
   const [signup, { loading }] = useMutation(SIGN_UP);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setValues({ ...values, [name]: value });
   };
 
   const validate = () => {
-    if (!fullName || !email || !username || !password ) {
+    if (!fullName || !email || !username || !password || !location) {
       return 'All fields are required';
     }
 
@@ -111,8 +112,9 @@ const SignUp = ({ history, refetch }) => {
 
     try {
       const response = await signup({
-        variables: { input: { fullName, email, password, username } },
+        variables: { input: { fullName, email, password, username, location } },
       });
+      console.log(response);
       localStorage.setItem('token', response.data.signup.token);
       await refetch();
       history.push(Routes.HOME);
@@ -121,7 +123,8 @@ const SignUp = ({ history, refetch }) => {
     }
   };
 
-  const { fullName, email, password, username } = values;
+  const { fullName, email, password, username, location } = values;
+  console.log(values)
   return (
     <Root maxWidth="lg">
       <Head />
@@ -179,16 +182,9 @@ const SignUp = ({ history, refetch }) => {
               borderColor="white"
             />
           </Spacing>
-          {/* <Spacing top="xs" bottom="xs">
-            <SelectOption
-              type="location"
-              name="location"
-              values={location}
-              onChange={handleChange}
-              placeholder="Location"
-              borderColor="white"
-            />
-          </Spacing> */}
+          <Spacing top="xs" bottom="xs">
+            <Select location={location} placeholder={"Where do you live ?"}/>
+          </Spacing>
           {error && (
             <Spacing bottom="sm" top="sm">
               <Error>{error}</Error>

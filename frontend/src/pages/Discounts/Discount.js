@@ -73,7 +73,6 @@ const Explore = () => {
     }
 
     const { discounts, count } = data.getDiscounts;
-    console.log(discounts)
     if (!discounts.length > 0) return <Empty text="No discounts yet." />;
 
     return (
