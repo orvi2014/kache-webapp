@@ -70,12 +70,12 @@ export const InputText = styled.input`
   transition: border 0.1s;
   border-radius: ${(p) => p.theme.radius.sm};
   padding-left: ${(p) => p.theme.spacing.xs};
-  border: 1px solid ${(p) => (p.borderColor ? p.theme.colors[p.borderColor] : p.theme.colors.border.main)};
+  border: 1px solid;
   color: ${(p) => p.theme.colors.text.secondary};
 
-  &:focus {
-    border-color: ${(p) => p.theme.colors.border.main};
-  }
+  // &:focus {
+  //   border-color: ${(p) => p.theme.colors.border.main};
+  // }
 `;
 
 /**

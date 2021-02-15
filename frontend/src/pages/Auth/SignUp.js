@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AutoSuggest from "react-autosuggest";
@@ -8,7 +8,7 @@ import { useApolloClient } from '@apollo/client';
 
 import { Spacing, Container } from 'components/Layout';
 import { H1, Error } from 'components/Text';
-import { InputText, Button } from 'components/Form';
+import { InputText, Button, Textarea } from 'components/Form';
 
 import { Loading } from 'components/Loading';
 import Head from 'components/Head';
@@ -60,6 +60,61 @@ const Form = styled.div`
   }
 `;
 
+const theme = {
+  container: {
+    position: 'relative'
+  },
+  
+  input: {
+    width: 280,
+    height: 36,
+    padding: '10px 20px',
+    fontFamily: 'Helvetica, sans-serif',
+    fontWeight: 300,
+    fontSize: 16,
+    border: '1px solid',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+  },
+  inputFocused: {
+    outline: 'none'
+  },
+  inputOpen: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0
+  },
+  suggestionsContainer: {
+    display: 'none'
+  },
+  suggestionsContainerOpen: {
+    display: 'block',
+    position: 'absolute',
+    top: 33,
+    width: 280,
+    border: '1px solid #aaa',
+    backgroundColor: '#fff',
+    fontFamily: 'Helvetica, sans-serif',
+    fontWeight: 300,
+    fontSize: 16,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    zIndex: 2
+  },
+  suggestionsList: {
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+  },
+  suggestion: {
+    cursor: 'pointer',
+    padding: '10px 20px'
+  },
+  suggestionHighlighted: {
+    backgroundColor: '#ddd'
+  }
+};
 /**
  * Sign Up page
  */
@@ -76,21 +131,19 @@ const SignUp = ({ history, refetch }) => {
     username: '',
     email: '',
     password: '',
-    location: '6026e70e55c340110fe33939',
+    location: '',
   });
   const [signup] = useMutation(SIGN_UP);
+  
+  
+  useEffect(()=>{
+    console.log('hhuuh', suggestions);
+  setValues({...values, ["location"]:locations});
+  }, [locations])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-  };
-  const handleInputChange = async (e) => {
-    // Trim white space only from beginning
-    // const value = e.target.value.replace(/^\s+/g, '');
-    setLocations(e);
-    if (e) {
-      setLoading(true);
-    }
   };
   const validate = () => {
     if (!fullName || !email || !username || !password || !location) {
@@ -146,7 +199,8 @@ const SignUp = ({ history, refetch }) => {
     }
   };
 
-  const { fullName, email, password, username, location } = values;
+  const { fullName, email, password, username,location } = values;
+  console.log('gguguy', values);
   return (
     <Root maxWidth="lg">
       <Head />
@@ -208,16 +262,15 @@ const SignUp = ({ history, refetch }) => {
             <Select location={location} placeholder={"Where do you live ?"}/>
           </Spacing> */}
           <Spacing top="xs" bottom="xs">
-            {console.log("hi",locations)}
-            <AutoSuggest
-            onChange={handleInputChange} 
+            <AutoSuggest 
             inputProps={{
-              placeholder:"Where do you live ?",
+              placeholder:"Where do you live?",
               autoComplete: "abcd",
               type: "search",
-              name: "locations",
+              name: "location",
               value: locations,
               onChange: (event, {newValue, method}) =>{
+                console.log("onchange", newValue);
                         setLocations(newValue)
               }
             }} 
@@ -248,21 +301,22 @@ const SignUp = ({ history, refetch }) => {
             onSuggestionsClearRequested={()=>{
               setSuggestions([])
             }}
-            onSuggestionSelected={(event, {suggestion, suggestionValue,method})=>{
-              // if (method === 'enter'){
-              //   event.preventDefault();
-              // }
-              console.log("sugges",suggestionValue)
-              setLocations(suggestionValue)
-              handleInputChange(suggestion.name)
+            onSuggestionSelected={(event, {suggestion,method})=>{
+              console.log(suggestion);          
+              setLocations(suggestion.id)
             }}
-            getSuggestionValue={suggestion => suggestion.name}
+            getSuggestionValue={suggestion => 
+              suggestion.name}
+            shouldRenderSuggestions={( value, reason)=>{
+              return value.trim().length>2;
+            }}
             renderSuggestion={
             suggestion => {       
                 return (<div>{suggestion.city} / {suggestion.name}</div>);              
-            }
-        
+            }        
           }
+          highlightFirstSuggestion={true}
+          theme={theme}
 
             />
           </Spacing>
@@ -271,7 +325,8 @@ const SignUp = ({ history, refetch }) => {
               <Error>{error}</Error>
             </Spacing>
           )}
-          <Spacing top="sm" />
+          <p>If your area is not listed, please send us email support@kachebd.xyz or call: 01683754716</p>
+          <Spacing top="sm" />          
           <Button size="large" disabled={loading}>
             Sign up
           </Button>
