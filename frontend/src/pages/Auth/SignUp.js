@@ -122,7 +122,8 @@ const SignUp = ({ history, refetch }) => {
   const client = useApolloClient();
 
   const [isOpenSearchResult, setIsOpenSearchResult] = useState(false);
-  const [locations, setLocations] = useState('');
+  const [locationId, setLocationId] = useState('');
+  const [locationName, setLocationName] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -137,10 +138,10 @@ const SignUp = ({ history, refetch }) => {
   
   
   useEffect(()=>{
-    console.log('hhuuh', suggestions);
-  setValues({...values, ["location"]:locations});
-  }, [locations])
+  setValues({...values, ["location"]:locationId});
+  }, [locationId])
 
+  // const onValueChange = ()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
@@ -176,7 +177,7 @@ const SignUp = ({ history, refetch }) => {
 
     return false;
   };
-  const debounceSearchQuery = useDebounce(locations, 500);
+  const debounceSearchQuery = useDebounce(locationName, 500);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -190,7 +191,6 @@ const SignUp = ({ history, refetch }) => {
       const response = await signup({
         variables: { input: { fullName, email, password, username, location } },
       });
-      console.log(response);
       localStorage.setItem('token', response.data.signup.token);
       await refetch();
       history.push(Routes.HOME);
@@ -200,7 +200,6 @@ const SignUp = ({ history, refetch }) => {
   };
 
   const { fullName, email, password, username,location } = values;
-  console.log('gguguy', values);
   return (
     <Root maxWidth="lg">
       <Head />
@@ -268,10 +267,11 @@ const SignUp = ({ history, refetch }) => {
               autoComplete: "abcd",
               type: "search",
               name: "location",
-              value: locations,
+              id: locationId,
+              value: locationName,
               onChange: (event, {newValue, method}) =>{
-                console.log("onchange", newValue);
-                        setLocations(newValue)
+                console.log(newValue);        
+                setLocationName(newValue)
               }
             }} 
             suggestions={suggestions}
@@ -302,8 +302,9 @@ const SignUp = ({ history, refetch }) => {
               setSuggestions([])
             }}
             onSuggestionSelected={(event, {suggestion,method})=>{
-              console.log(suggestion);          
-              setLocations(suggestion.id)
+              let location = `${suggestion.city} / ${suggestion.name}`
+              setLocationName(location)          
+              setLocationId(suggestion.id)
             }}
             getSuggestionValue={suggestion => 
               suggestion.name}

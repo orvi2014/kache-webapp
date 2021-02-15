@@ -207,7 +207,6 @@ const Query = {
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: 'desc' });
-      console.log(users);
     return { users, count };
   },
   /**
@@ -220,7 +219,6 @@ const Query = {
     if (!searchQuery) {
       return [];
     }
-    console.log(authUser)
     const users = User.find({
       $or: [{ username: new RegExp(searchQuery, 'i') }, { fullName: new RegExp(searchQuery, 'i') }],
       _id: {
@@ -229,7 +227,6 @@ const Query = {
       location: authUser.location
 
     }).limit(50);
-    console.log(users);
     return users;
   },
   /**
@@ -260,7 +257,6 @@ const Query = {
     }
 
     const randomUsers = await User.find(query).skip(random).limit(LIMIT);
-    console.log(randomUsers);
     return randomUsers;
   },
   /**
@@ -324,7 +320,6 @@ const Mutation = {
       const field = user.email === email ? 'email' : 'username';
       throw new Error(`User with given ${field} already exists.`);
     }
-    console.log(location);
     // Empty field validation
     if (!fullName || !email || !username || !password || !location) {
       throw new Error('All fields are required.');
