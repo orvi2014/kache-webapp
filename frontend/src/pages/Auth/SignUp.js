@@ -68,7 +68,7 @@ const theme = {
   input: {
     width: 280,
     height: 36,
-    padding: '10px 20px',
+    padding: '10px 10px',
     fontFamily: 'Helvetica, sans-serif',
     fontWeight: 300,
     fontSize: 16,
@@ -326,7 +326,7 @@ const SignUp = ({ history, refetch }) => {
               <Error>{error}</Error>
             </Spacing>
           )}
-          <p>If your area is not listed, please send us email support@kachebd.xyz or call: 01683754716</p>
+          <p>If your area is not listed, please send us email support@kachebd.xyz or call: 01682760923</p>
           <Spacing top="sm" />          
           <Button size="large" disabled={loading}>
             Sign up

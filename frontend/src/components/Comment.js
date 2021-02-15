@@ -12,6 +12,7 @@ import Avatar from 'components/Avatar';
 import { GET_AUTH_USER, GET_USER } from 'graphql/user';
 import { DELETE_COMMENT } from 'graphql/comment';
 import { GET_POST, GET_POSTS, GET_FOLLOWED_POSTS } from 'graphql/post';
+import { GET_DISCOUNTS } from 'graphql/discount';
 
 import { useNotifications } from '../hooks/useNotifications';
 
@@ -70,6 +71,7 @@ const Comment = ({ comment, postId, postAuthor }) => {
       { query: GET_AUTH_USER },
       { query: GET_POSTS, variables: { authUserId: auth.user.id } },
       { query: GET_POST, variables: { id: postId } },
+      { query: GET_DISCOUNTS, variables: { id: postId } },
     ],
   });
 

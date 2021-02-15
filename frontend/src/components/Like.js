@@ -10,6 +10,7 @@ import { Button } from './Form';
 import { GET_FOLLOWED_POSTS, GET_POSTS } from 'graphql/post';
 import { GET_AUTH_USER } from 'graphql/user';
 import { CREATE_LIKE, DELETE_LIKE } from 'graphql/like';
+import { GET_DISCOUNTS } from 'graphql/discount';
 
 import { NotificationType } from 'constants/NotificationType';
 
@@ -46,6 +47,7 @@ const Like = ({ postId, user, likes, withText, fullWidth }) => {
       { query: GET_AUTH_USER },
       { query: GET_POSTS, variables: { authUserId: auth.user.id } },
       { query: GET_FOLLOWED_POSTS, variables: { userId: auth.user.id } },
+      { query: GET_DISCOUNTS },
     ],
   });
 

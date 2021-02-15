@@ -7,7 +7,7 @@ import { Container } from 'components/Layout';
 // import ExploreCard from '../Explore/ExploreCard';
 import Skeleton from 'components/Skeleton';
 import PostPopup from 'components/PostPopup';
-import PostCard from 'components/PostCard';
+import DiscountCard from './DiscountCard';
 import Modal from 'components/Modal';
 import InfiniteScroll from 'components/InfiniteScroll';
 import Empty from 'components/Empty';
@@ -88,13 +88,12 @@ const Explore = () => {
 
           return (
             <Fragment>
-                {console.log(data)}
                 {data.map((discount) => (
                   <Fragment key={discount.id}>
                     <Modal open={modalPostId === discount.id} onClose={closeModal}>
                       <PostPopup id={discount.id} closeModal={closeModal} />
                     </Modal>
-                    <PostCard
+                    <DiscountCard
                       author={discount.author}
                       imagePublicId={discount.imagePublicId}
                       postId={discount.id}
