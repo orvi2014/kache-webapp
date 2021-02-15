@@ -269,8 +269,7 @@ const SignUp = ({ history, refetch }) => {
               name: "location",
               id: locationId,
               value: locationName,
-              onChange: (event, {newValue, method}) =>{
-                console.log(newValue);        
+              onChange: (event, {newValue, method}) =>{       
                 setLocationName(newValue)
               }
             }} 
