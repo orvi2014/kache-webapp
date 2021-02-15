@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import AutoSuggest from "react-autosuggest";
 import { withRouter } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
 
 import { Spacing, Container } from 'components/Layout';
 import { H1, Error } from 'components/Text';
 import { InputText, Button } from 'components/Form';
-import Select from 'components/Select';
+
+import { Loading } from 'components/Loading';
 import Head from 'components/Head';
 
 import { SIGN_UP } from 'graphql/user';
+import { useDebounce } from 'hooks/useDebounce';
+
+import { SEARCH_LOCATIONS, GET_LOCATIONS } from 'graphql/location';
 
 import * as Routes from 'routes';
+import { render } from 'react-dom';
 
 const Root = styled(Container)`
   display: flex;
@@ -57,22 +64,34 @@ const Form = styled.div`
  * Sign Up page
  */
 const SignUp = ({ history, refetch }) => {
+  const client = useApolloClient();
+
+  const [isOpenSearchResult, setIsOpenSearchResult] = useState(false);
+  const [locations, setLocations] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [values, setValues] = useState({
     fullName: '',
     username: '',
     email: '',
     password: '',
-    location: '',
+    location: '6026e70e55c340110fe33939',
   });
-  const [signup, { loading }] = useMutation(SIGN_UP);
+  const [signup] = useMutation(SIGN_UP);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setValues({ ...values, [name]: value });
   };
-
+  const handleInputChange = async (e) => {
+    // Trim white space only from beginning
+    // const value = e.target.value.replace(/^\s+/g, '');
+    setLocations(e);
+    if (e) {
+      setLoading(true);
+    }
+  };
   const validate = () => {
     if (!fullName || !email || !username || !password || !location) {
       return 'All fields are required';
@@ -98,9 +117,13 @@ const SignUp = ({ history, refetch }) => {
       return 'Password min 6 characters';
     }
 
+    if (location === ''){
+      return 'You should select your area';
+    }
+
     return false;
   };
-
+  const debounceSearchQuery = useDebounce(locations, 500);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -124,7 +147,6 @@ const SignUp = ({ history, refetch }) => {
   };
 
   const { fullName, email, password, username, location } = values;
-  console.log(values)
   return (
     <Root maxWidth="lg">
       <Head />
@@ -182,8 +204,67 @@ const SignUp = ({ history, refetch }) => {
               borderColor="white"
             />
           </Spacing>
-          <Spacing top="xs" bottom="xs">
+          {/* <Spacing top="xs" bottom="xs">
             <Select location={location} placeholder={"Where do you live ?"}/>
+          </Spacing> */}
+          <Spacing top="xs" bottom="xs">
+            {console.log("hi",locations)}
+            <AutoSuggest
+            onChange={handleInputChange} 
+            inputProps={{
+              placeholder:"Where do you live ?",
+              autoComplete: "abcd",
+              type: "search",
+              name: "locations",
+              value: locations,
+              onChange: (event, {newValue, method}) =>{
+                        setLocations(newValue)
+              }
+            }} 
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={async({value})=>{
+              if(!value){
+                setSuggestions([]);
+                return;
+              }
+              try {
+                const { data } = await client.query({
+                  query: SEARCH_LOCATIONS,
+                  variables: { searchQuery: debounceSearchQuery },
+                });
+                setSuggestions(data.searchLocations.map(row=>({
+                  name: row.name,
+                  city: row.city,
+                  id:row.id
+                })));
+                setLoading(false);
+
+                const openSearchResult = debounceSearchQuery !== '';
+                setIsOpenSearchResult(openSearchResult);
+              } catch (error) {
+                setSuggestions([]);
+              }
+            }}
+            onSuggestionsClearRequested={()=>{
+              setSuggestions([])
+            }}
+            onSuggestionSelected={(event, {suggestion, suggestionValue,method})=>{
+              // if (method === 'enter'){
+              //   event.preventDefault();
+              // }
+              console.log("sugges",suggestionValue)
+              setLocations(suggestionValue)
+              handleInputChange(suggestion.name)
+            }}
+            getSuggestionValue={suggestion => suggestion.name}
+            renderSuggestion={
+            suggestion => {       
+                return (<div>{suggestion.city} / {suggestion.name}</div>);              
+            }
+        
+          }
+
+            />
           </Spacing>
           {error && (
             <Spacing bottom="sm" top="sm">

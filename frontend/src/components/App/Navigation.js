@@ -16,14 +16,14 @@ const Link = styled(NavLink)`
   &:hover,
   &.selected {
     color: ${(p) => p.theme.colors.button};
-    background-color: ${(p) => p.theme.colors.button};
+    background-color: ${(p) => p.theme.colors.white};
 
     svg path {
       fill: ${(p) => p.theme.colors.button};
     }
 
     @media (min-width: ${(p) => p.theme.screen.md}) {
-      background-color: ${(p) => p.theme.colors.white};
+      background-color: ${(p) => p.theme.colors.primary};
     }
   }
 `;

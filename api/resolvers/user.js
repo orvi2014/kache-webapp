@@ -190,12 +190,13 @@ const Query = {
     const userFollowing = [];
     const follow = await Follow.find({ follower: userId }, { _id: 0 }).select('user');
     follow.map((f) => userFollowing.push(f.user));
-
+    // Find users lcoation id
+    const  user = await User.findOne({_id: userId}).select('location');
     // Find users that user is not following
     const query = {
-      $and: [{ _id: { $ne: userId } }, { _id: { $nin: userFollowing } }],
+      $and: [{ _id: { $ne: userId }}, {location: user.location}, { _id: { $nin: userFollowing }}],
     };
-    const count = await User.where(query).countDocuments();
+    const count = await User.find(query).countDocuments();
     const users = await User.find(query)
       .populate('followers')
       .populate('following')
@@ -206,7 +207,7 @@ const Query = {
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: 'desc' });
-
+      console.log(users);
     return { users, count };
   },
   /**
@@ -219,14 +220,16 @@ const Query = {
     if (!searchQuery) {
       return [];
     }
-
+    console.log(authUser)
     const users = User.find({
       $or: [{ username: new RegExp(searchQuery, 'i') }, { fullName: new RegExp(searchQuery, 'i') }],
       _id: {
         $ne: authUser.id,
       },
-    }).limit(50);
+      location: authUser.location
 
+    }).limit(50);
+    console.log(users);
     return users;
   },
   /**
@@ -242,9 +245,9 @@ const Query = {
     const following = await Follow.find({ follower: userId }, { _id: 0 }).select('user');
     following.map((f) => userFollowing.push(f.user));
     userFollowing.push(userId);
-
+    const user = await User.findOne({_id: userId}).select('location');
     // Find random users
-    const query = { _id: { $nin: userFollowing } };
+    const query = { $and:[{_id: { $nin: userFollowing } },{location: user.location}]};
     const usersCount = await User.where(query).countDocuments();
     let random = Math.floor(Math.random() * usersCount);
 
@@ -257,7 +260,7 @@ const Query = {
     }
 
     const randomUsers = await User.find(query).skip(random).limit(LIMIT);
-
+    console.log(randomUsers);
     return randomUsers;
   },
   /**
@@ -321,9 +324,9 @@ const Mutation = {
       const field = user.email === email ? 'email' : 'username';
       throw new Error(`User with given ${field} already exists.`);
     }
-
+    console.log(location);
     // Empty field validation
-    if (!fullName || !email || !username || !password) {
+    if (!fullName || !email || !username || !password || !location) {
       throw new Error('All fields are required.');
     }
 
