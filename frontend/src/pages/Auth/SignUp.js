@@ -257,9 +257,6 @@ const SignUp = ({ history, refetch }) => {
               borderColor="white"
             />
           </Spacing>
-          {/* <Spacing top="xs" bottom="xs">
-            <Select location={location} placeholder={"Where do you live ?"}/>
-          </Spacing> */}
           <Spacing top="xs" bottom="xs">
             <AutoSuggest 
             inputProps={{
@@ -269,8 +266,7 @@ const SignUp = ({ history, refetch }) => {
               name: "location",
               id: locationId,
               value: locationName,
-              onChange: (event, {newValue, method}) =>{
-                console.log(newValue);        
+              onChange: (event, {newValue, method}) =>{      
                 setLocationName(newValue)
               }
             }} 
@@ -309,7 +305,7 @@ const SignUp = ({ history, refetch }) => {
             getSuggestionValue={suggestion => 
               suggestion.name}
             shouldRenderSuggestions={( value, reason)=>{
-              return value.trim().length>2;
+              return value.trim().length>0;
             }}
             renderSuggestion={
             suggestion => {       
