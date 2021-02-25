@@ -164,8 +164,8 @@ const Header = ({ location, toggleSideBar }) => {
           <Hamburger onClick={toggleSideBar}>
             <MenuIcon />
           </Hamburger>
-
-          <Logo to={Routes.HOME}>{SiteInfo.name}</Logo>
+         
+          <Logo to={Routes.HOME}> <a><img src={SiteInfo.logo} alt={SiteInfo.name} border="0" /></a> </Logo>
 
           <Spacing left="sm" right="md">
             <Search location={location} placeholder="Search" />
