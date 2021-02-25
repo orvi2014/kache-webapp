@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import { withFilter } from 'apollo-server';
 
-import { uploadToCloudinary } from '../utils/cloudinary';
+import { generateGetUrl } from '../utils/s3';
 import { generateToken } from '../utils/generate-token';
 import { sendEmail } from '../utils/email';
 import { pubSub } from '../utils/apollo-server';
@@ -460,17 +460,16 @@ const Mutation = {
    */
   uploadUserPhoto: async (root, { input: { id, image, imagePublicId, isCover } }, { User }) => {
     const { createReadStream } = await image;
-    const stream = createReadStream();
-    const uploadImage = await uploadToCloudinary(stream, 'user', imagePublicId);
+    const uploadImage =await generateGetUrl(image);
 
-    if (uploadImage.secure_url) {
+    if (uploadImage) {
       const fieldsToUpdate = {};
       if (isCover) {
-        fieldsToUpdate.coverImage = uploadImage.secure_url;
-        fieldsToUpdate.coverImagePublicId = uploadImage.public_id;
+        fieldsToUpdate.coverImage = uploadImage.Location;
+        fieldsToUpdate.coverImagePublicId = uploadImage.key;
       } else {
-        fieldsToUpdate.image = uploadImage.secure_url;
-        fieldsToUpdate.imagePublicId = uploadImage.public_id;
+        fieldsToUpdate.image = uploadImage.Location;
+        fieldsToUpdate.imagePublicId = uploadImage.key;
       }
 
       const updatedUser = await User.findOneAndUpdate({ _id: id }, { ...fieldsToUpdate }, { new: true })
