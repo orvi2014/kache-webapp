@@ -1,4 +1,5 @@
 {
   "name": "Kache Web",
-  "logo": "https://kache-resource.s3-ap-southeast-1.amazonaws.com/64X64.png"
+  "logo": "https://kache-resource.s3-ap-southeast-1.amazonaws.com/64X64.png",
+  "whiteLogo": "https://kache-resource.s3-ap-southeast-1.amazonaws.com/64X64(white).png"
 }

@@ -61,7 +61,7 @@ const AuthHeader = ({ refetch }) => {
   return (
     <Root>
       <StyledContainer maxWidth="lg">
-      <Logo to={Routes.HOME}> <a><img src={SiteInfo.logo} alt={SiteInfo.name} border="0" /></a> </Logo>
+      <Logo to={Routes.HOME}> <a><img src={SiteInfo.whiteLogo} alt={SiteInfo.name} border="0" /></a> </Logo>
 
         <SignInContainer>
           <SignIn refetch={refetch} />
