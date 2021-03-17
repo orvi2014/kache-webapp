@@ -133,6 +133,7 @@ const SignUp = ({ history, refetch }) => {
     email: '',
     password: '',
     location: '',
+    contactNo:'',
   });
   const [signup] = useMutation(SIGN_UP);
   
@@ -147,7 +148,7 @@ const SignUp = ({ history, refetch }) => {
     setValues({ ...values, [name]: value });
   };
   const validate = () => {
-    if (!fullName || !email || !username || !password || !location) {
+    if (!fullName || !email || !username || !password || !location || !contactNo) {
       return 'All fields are required';
     }
 
@@ -189,7 +190,7 @@ const SignUp = ({ history, refetch }) => {
 
     try {
       const response = await signup({
-        variables: { input: { fullName, email, password, username, location } },
+        variables: { input: { fullName, email, password, username, location, contactNo } },
       });
       localStorage.setItem('token', response.data.signup.token);
       await refetch();
@@ -199,7 +200,7 @@ const SignUp = ({ history, refetch }) => {
     }
   };
 
-  const { fullName, email, password, username,location } = values;
+  const { fullName, email, password, username,location, contactNo } = values;
   return (
     <Root maxWidth="lg">
       <Head />
@@ -239,6 +240,14 @@ const SignUp = ({ history, refetch }) => {
               borderColor="white"
             />
           </Spacing>
+          <InputText
+            type="text"
+            name="contactNo"
+            values={contactNo}
+            onChange={handleChange}
+            placeholder="+8801XXXXXXX"
+            borderColor="white"
+          />
           <InputText
             type="text"
             name="username"

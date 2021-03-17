@@ -31,6 +31,12 @@ const userSchema = new Schema(
       ref: 'Location',
       required: true,
     },
+    contactNo: {
+      type: String,
+      unique: true,
+      trim: true,
+      required: true,
+    },
     passwordResetToken: String,
     passwordResetTokenExpiry: Date,
     password: {

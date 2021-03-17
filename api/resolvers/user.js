@@ -313,7 +313,7 @@ const Mutation = {
    * @param {string} username
    * @param {string} password
    */
-  signup: async (root, { input: { fullName, email, username, password, location } }, { User }) => {
+  signup: async (root, { input: { fullName, email, username, password, location, contactNo } }, { User }) => {
     // Check if user with given email or username already exists
     const user = await User.findOne().or([{ email }, { username }]);
     if (user) {
@@ -321,7 +321,7 @@ const Mutation = {
       throw new Error(`User with given ${field} already exists.`);
     }
     // Empty field validation
-    if (!fullName || !email || !username || !password || !location) {
+    if (!fullName || !email || !username || !password || !location || !contactNo) {
       throw new Error('All fields are required.');
     }
 
@@ -365,7 +365,8 @@ const Mutation = {
       email,
       username,
       password,
-      location
+      location,
+      contactNo,
     }).save();
 
     return {
