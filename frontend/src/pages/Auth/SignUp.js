@@ -50,7 +50,7 @@ const Heading = styled(H1)`
 `;
 
 const Form = styled.div`
-  padding: ${(p) => p.theme.spacing.md};
+  padding: ${(p) => p.theme.spacing.sm};
   border-radius: ${(p) => p.theme.radius.sm};
   background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
@@ -217,7 +217,7 @@ const SignUp = ({ history, refetch }) => {
       </Welcome>
 
       <Form>
-        <Spacing bottom="md">
+        <Spacing bottom="xxs">
           <H1>Create Account</H1>
         </Spacing>
 
