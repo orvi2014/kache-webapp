@@ -15,9 +15,7 @@ import PostCardOption from 'components/PostCard/PostCardOption';
 import Modal from 'components/Modal';
 import Avatar from 'components/Avatar';
 
-import { GET_FOLLOWED_POSTS, DELETE_POST } from 'graphql/post';
-import { GET_AUTH_USER } from 'graphql/user';
-import { GET_USER_POSTS } from 'graphql/user';
+import { GET_DISCOUNTS } from 'graphql/discount';
 
 import { HOME_PAGE_POSTS_LIMIT, PROFILE_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
 
@@ -121,7 +119,7 @@ const CommentLine = styled.div`
 /**
  * Component for rendering user post
  */
-const DiscountCard = ({ author, imagePublicId, title, createdAt, image, postId, openModal }) => {
+const DiscountCard = ({ author, imagePublicId,creator, title, createdAt, image, postId, openModal }) => {
   const [{ auth }] = useStore();
   const client = useApolloClient();
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -142,25 +140,9 @@ const DiscountCard = ({ author, imagePublicId, title, createdAt, image, postId, 
   const deletePost = async () => {
     try {
       await client.mutate({
-        mutation: DELETE_POST,
-        variables: { input: { id: postId, imagePublicId } },
         refetchQueries: () => [
           {
-            query: GET_FOLLOWED_POSTS,
-            variables: {
-              userId: auth.user.id,
-              skip: 0,
-              limit: HOME_PAGE_POSTS_LIMIT,
-            },
-          },
-          { query: GET_AUTH_USER },
-          {
-            query: GET_USER_POSTS,
-            variables: {
-              username: auth.user.username,
-              skip: 0,
-              limit: PROFILE_PAGE_POSTS_LIMIT,
-            },
+            query: GET_DISCOUNTS,
           },
         ],
       });
@@ -179,20 +161,20 @@ const DiscountCard = ({ author, imagePublicId, title, createdAt, image, postId, 
         <TopRow>
           <Author
             to={generatePath(Routes.USER_PROFILE, {
-              username: author.username,
+              username: author.fullName,
             })}
           >
             <Avatar image={author.image} />
 
             <Spacing left="xs">
-              <Name>{author.fullName}</Name>
+              <Name>{console.log(author.creator)}</Name>
               <CreatedAt>{timeAgo(createdAt)}</CreatedAt>
             </Spacing>
           </Author>
 
-          <Button ghost onClick={openOption}>
+          {/* <Button ghost onClick={openOption}>
             <DotsIcon />
-          </Button>
+          </Button> */}
         </TopRow>
 
         <Spacing left="sm" bottom="sm" top="xs" right="sm">
@@ -245,7 +227,8 @@ const DiscountCard = ({ author, imagePublicId, title, createdAt, image, postId, 
 };
 
 DiscountCard.propTypes = {
-  author: PropTypes.object.isRequired,
+  author: PropTypes.object,
+  creator: PropTypes.string,
   imagePublicId: PropTypes.string,
   title: PropTypes.string.isRequired,
   image: PropTypes.string,

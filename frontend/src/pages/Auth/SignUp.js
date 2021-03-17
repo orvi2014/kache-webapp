@@ -240,14 +240,17 @@ const SignUp = ({ history, refetch }) => {
               borderColor="white"
             />
           </Spacing>
+          <Spacing top="xs" bottom="xs">
           <InputText
             type="text"
             name="contactNo"
             values={contactNo}
             onChange={handleChange}
-            placeholder="+8801XXXXXXX"
+            placeholder="+8801682760923"
             borderColor="white"
           />
+          </Spacing>
+          <Spacing top="xs" bottom="xs">
           <InputText
             type="text"
             name="username"
@@ -256,6 +259,7 @@ const SignUp = ({ history, refetch }) => {
             placeholder="Username"
             borderColor="white"
           />
+          </Spacing>
           <Spacing top="xs" bottom="xs">
             <InputText
               type="password"

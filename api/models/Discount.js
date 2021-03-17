@@ -14,6 +14,9 @@ const discountSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    creator: {
+      type: String,
+    },
     likes: [
       {
         type: Schema.Types.ObjectId,

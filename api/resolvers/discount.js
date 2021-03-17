@@ -9,27 +9,27 @@ const Query = {
   getDiscounts: async (root, { skip, limit }, { Discount }) => {
     const discountsCount = await Discount.find().countDocuments();
     const allDiscounts = await Discount.find()
-      .populate({
-        path: 'author',
-        populate: [
-          { path: 'following' },
-          { path: 'followers' },
-          {
-            path: 'notifications',
-            populate: [{ path: 'author' }, { path: 'follow' }, { path: 'like' }, { path: 'comment' }],
-          },
-        ],
-      })
-      .populate('likes')
-      .populate({
-        path: 'comments',
-        options: { sort: { createdAt: 'desc' } },
-        populate: { path: 'author' },
-      })
+      // .populate({
+      //   path: 'author',
+      //   // populate: [
+      //   //   { path: 'following' },
+      //   //   { path: 'followers' },
+      //   //   {
+      //   //     path: 'notifications',
+      //   //     populate: [{ path: 'author' }, { path: 'follow' }, { path: 'like' }, { path: 'comment' }],
+      //   //   },
+      //   // ],
+      // })
+      // .populate('likes')
+      // // .populate({
+      // //   path: 'comments',
+      // //   options: { sort: { createdAt: 'desc' } },
+      // //   populate: { path: 'author' },
+      // // })
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: 'desc' });
-
+      console.log(allDiscounts);
     return { discounts: allDiscounts, count: discountsCount };
   },
   /**

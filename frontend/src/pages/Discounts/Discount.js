@@ -94,7 +94,7 @@ const Explore = () => {
                       <PostPopup id={discount.id} closeModal={closeModal} />
                     </Modal>
                     <DiscountCard
-                      author={discount.author}
+                      // author={discount.author}
                       imagePublicId={discount.imagePublicId}
                       postId={discount.id}
                       comments={discount.comments}
@@ -102,6 +102,7 @@ const Explore = () => {
                       title={discount.title}
                       image={discount.image}
                       likes={discount.likes}
+                      creator={discount.creator}
                       openModal={() => openModal(discount.id)}
                     />
                   </Fragment>
