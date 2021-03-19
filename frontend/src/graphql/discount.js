@@ -73,6 +73,7 @@ query($skip: Int, $limit: Int) {
       image
       creator
       createdAt
+      imagePublicId
     }
   }
 }

@@ -28,7 +28,7 @@ const Query = {
       // // })
       // .skip(skip)
       // .limit(limit)
-      .sort({ createdAt: '-1' });
+      .sort({ createdAt: -1 });
     return { discounts: allDiscounts, count: discountsCount };
   },
   /**

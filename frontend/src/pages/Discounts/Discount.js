@@ -88,15 +88,16 @@ const Explore = () => {
             <Fragment>
                 {data.map((discount) => (
                   <Fragment key={discount.id}>
+                    {console.log(discount.imagePublicId)}
                     <DiscountCard
-                      author={discount.creator}
+                      // author={discount.creator}
                       imagePublicId={discount.imagePublicId}
                       postId={discount.id}
                       // comments={discount.comments}
                       createdAt={discount.createdAt}
                       title={discount.title}
-                      image={discount.image}
-                      // likes={discount.likes}
+                      // image={discount.image}
+                      // // likes={discount.likes}
                       creator={discount.creator}
                       openModal={() => openModal(discount.id)}
                     />

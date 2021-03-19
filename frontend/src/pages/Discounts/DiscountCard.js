@@ -176,10 +176,10 @@ const DiscountCard = ({ imagePublicId,creator, title, createdAt, image, postId, 
           </Title>
         </Spacing>
 
-        {image && <Poster src={image} onClick={openModal} />}
+        {imagePublicId && <Poster src={imagePublicId} onClick={openModal} />}
 
         <BottomRow>
-          <CountAndIcons>
+          {/* <CountAndIcons> */}
             {/* <Count>
               {likes.length} likes
               <Spacing />
@@ -195,7 +195,7 @@ const DiscountCard = ({ imagePublicId,creator, title, createdAt, image, postId, 
                 <PostCommentIcon /> <Spacing inline left="xxs" /> <b>Comment</b>
               </Button>
             </Icons> */}
-          </CountAndIcons>
+          {/* </CountAndIcons> */}
 
           {/* {isCommentOpen && (
             <>
