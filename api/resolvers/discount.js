@@ -8,7 +8,7 @@ const Query = {
    */
   getDiscounts: async (root, { skip, limit }, { Discount }) => {
     const discountsCount = await Discount.find().countDocuments();
-    const allDiscounts = await Discount.find();
+    const allDiscounts = await Discount.find()
       // .populate({
       //   path: 'author',
       //   // populate: [
@@ -28,7 +28,7 @@ const Query = {
       // // })
       // .skip(skip)
       // .limit(limit)
-      // .sort({ createdAt: 'desc' });
+      .sort({ createdAt: '-1' });
     return { discounts: allDiscounts, count: discountsCount };
   },
   /**
