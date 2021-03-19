@@ -119,7 +119,7 @@ const CommentLine = styled.div`
 /**
  * Component for rendering user post
  */
-const DiscountCard = ({ author, imagePublicId,creator, title, createdAt, image, postId, openModal }) => {
+const DiscountCard = ({ imagePublicId,creator, title, createdAt, image, postId, openModal }) => {
   const [{ auth }] = useStore();
   const client = useApolloClient();
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -155,26 +155,19 @@ const DiscountCard = ({ author, imagePublicId,creator, title, createdAt, image, 
     <>
       <Root>
         <Modal onClose={closeOption} open={isOptionOpen}>
-          <PostCardOption postId={postId} closeOption={closeOption} author={author} deletePost={deletePost} />
+          <PostCardOption postId={postId} closeOption={closeOption} author={creator} deletePost={deletePost} />
         </Modal>
 
         <TopRow>
           <Author
-            to={generatePath(Routes.USER_PROFILE, {
-              username: author.fullName,
-            })}
           >
-            <Avatar image={author.image} />
+            <Avatar image={image} />
 
             <Spacing left="xs">
-              <Name>{console.log(author.creator)}</Name>
+              <Name>{creator}</Name>
               <CreatedAt>{timeAgo(createdAt)}</CreatedAt>
             </Spacing>
           </Author>
-
-          {/* <Button ghost onClick={openOption}>
-            <DotsIcon />
-          </Button> */}
         </TopRow>
 
         <Spacing left="sm" bottom="sm" top="xs" right="sm">

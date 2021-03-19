@@ -18,8 +18,6 @@ import { GET_DISCOUNTS } from 'graphql/discount';
 
 import { EXPLORE_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
 
-import { useStore } from 'store';
-
 import * as Routes from 'routes';
 
 const Root = styled(Container)`
@@ -90,18 +88,15 @@ const Explore = () => {
             <Fragment>
                 {data.map((discount) => (
                   <Fragment key={discount.id}>
-                    <Modal open={modalPostId === discount.id} onClose={closeModal}>
-                      <PostPopup id={discount.id} closeModal={closeModal} />
-                    </Modal>
                     <DiscountCard
-                      // author={discount.author}
+                      author={discount.creator}
                       imagePublicId={discount.imagePublicId}
                       postId={discount.id}
-                      comments={discount.comments}
+                      // comments={discount.comments}
                       createdAt={discount.createdAt}
                       title={discount.title}
                       image={discount.image}
-                      likes={discount.likes}
+                      // likes={discount.likes}
                       creator={discount.creator}
                       openModal={() => openModal(discount.id)}
                     />

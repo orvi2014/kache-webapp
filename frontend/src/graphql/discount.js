@@ -71,9 +71,8 @@ query($skip: Int, $limit: Int) {
       id
       title
       image
-      ${postAuthorPayload}
-      ${postCommentsPayload}
-      ${postLikesPayload}
+      creator
+      createdAt
     }
   }
 }

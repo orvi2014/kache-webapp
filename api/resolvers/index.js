@@ -21,6 +21,5 @@ export default [
   followResolver,
   commentResolver,
   notificationResolver,
-  message,
-  
+  message, 
 ];

@@ -10,10 +10,10 @@ const discountSchema = Schema(
     title: String,
     image: String,
     imagePublicId: String,
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
+    // author: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'User',
+    // },
     creator: {
       type: String,
     },
