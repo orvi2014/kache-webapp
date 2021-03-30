@@ -88,11 +88,12 @@ const Explore = () => {
             <Fragment>
                 {data.map((discount) => (
                   <Fragment key={discount.id}>
-                    {console.log(discount.imagePublicId)}
+                    {console.log(discount.link)}
                     <DiscountCard
                       // author={discount.creator}
                       imagePublicId={discount.imagePublicId}
                       postId={discount.id}
+                      link={discount.link}
                       // comments={discount.comments}
                       createdAt={discount.createdAt}
                       title={discount.title}

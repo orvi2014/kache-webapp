@@ -14,6 +14,7 @@ const discountSchema = Schema(
     //   type: Schema.Types.ObjectId,
     //   ref: 'User',
     // },
+    link: String,
     creator: {
       type: String,
     },

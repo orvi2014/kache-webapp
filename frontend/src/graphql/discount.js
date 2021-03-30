@@ -71,6 +71,7 @@ query($skip: Int, $limit: Int) {
       id
       title
       image
+      link
       creator
       createdAt
       imagePublicId

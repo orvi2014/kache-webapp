@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { generatePath } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useApolloClient } from '@apollo/client';
 
@@ -9,7 +9,7 @@ import CreateComment from 'components/CreateComment';
 import Like from 'components/Like';
 import { DotsIcon, PostCommentIcon } from 'components/icons';
 import { Spacing } from 'components/Layout';
-import { A, H3 } from 'components/Text';
+import { H3 } from 'components/Text';
 import { Button } from 'components/Form';
 import PostCardOption from 'components/PostCard/PostCardOption';
 import Modal from 'components/Modal';
@@ -33,6 +33,12 @@ const Root = styled.div`
   border: 1px solid ${(p) => p.theme.colors.border.main};
 `;
 
+const A = styled.div`
+text-decoration: none;
+transition: color 0.1s;
+display: inline-block;
+color: blue;
+`;
 const TopRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -119,7 +125,7 @@ const CommentLine = styled.div`
 /**
  * Component for rendering user post
  */
-const DiscountCard = ({ imagePublicId,creator, title, createdAt, image, postId, openModal }) => {
+const DiscountCard = ({ imagePublicId,creator, title, createdAt, image,link, postId, openModal }) => {
   const [{ auth }] = useStore();
   const client = useApolloClient();
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -172,10 +178,16 @@ const DiscountCard = ({ imagePublicId,creator, title, createdAt, image, postId, 
 
         <Spacing left="sm" bottom="sm" top="xs" right="sm">
           <Title>
-            <H3>{title}</H3>
+            <H3>{title}</H3>            
           </Title>
+          <A>
+          <a href={link}
+            style={{ color: 'inherit', textDecoration: 'inherit'}}
+            target="_blank">
+            {link}
+            </a>
+          </A>
         </Spacing>
-
         {imagePublicId && <Poster src={imagePublicId} onClick={openModal} />}
 
         <BottomRow>

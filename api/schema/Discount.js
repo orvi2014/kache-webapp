@@ -12,6 +12,7 @@ const DiscountSchema = gql`
     title: String
     image: File
     imagePublicId: String
+    link: String
     author: User!
     creator: String!
     likes: [Like]
@@ -30,6 +31,7 @@ const DiscountSchema = gql`
     title: String
     image: String
     imagePublicId: String
+    link: String
     author: UserPayload!
     creator: String
     likes: [Like]
